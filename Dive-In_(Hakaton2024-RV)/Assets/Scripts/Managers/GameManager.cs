@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     public int numberOfExpedition = 0;
 
+    [Header("Player")]
+    public int coins = 0;
+
     [Header("Player Upgrades")]
     public int u_Peraje = 0;
     public int u_Rukavice = 0;

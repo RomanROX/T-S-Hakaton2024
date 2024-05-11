@@ -44,7 +44,6 @@ public class Interactor : MonoBehaviour
     void Update()
     {
         Interact();
-        Debug.Log(startPicking);
     }
 
     public void Interact()

@@ -30,10 +30,7 @@ public class GameManager : MonoBehaviour
         pickUpSpeedMultiplier = 1f + (0.1f * u_Rukavice);
         tankSizeMultiplier = 1f + (0.05f * u_Spremnik);
         clarityMultiplier = 1f + (0.1f * u_Naocale);
-    }
 
-    void Start()
-    {
         if (Instance is null)
         {
             Instance = this;
@@ -43,5 +40,9 @@ public class GameManager : MonoBehaviour
         {
             DestroyImmediate(gameObject);
         }
+    }
+
+    void Start()
+    {
     }
 }

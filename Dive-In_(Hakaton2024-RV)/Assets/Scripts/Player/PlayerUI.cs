@@ -17,6 +17,7 @@ public class PlayerUI : MonoBehaviour
     [Header("Coins")]
     [SerializeField] TMP_Text coinText;
 
+
     void Start()
     {
         interactSlider.gameObject.SetActive(false); 

@@ -84,10 +84,10 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 GetKeyboardInput()
     {
-        float yAxisInput = 0f;
+        float yAxisInput;
 
-        if (Input.GetKey(KeyCode.Q)) yAxisInput = 1f;
-        if (Input.GetKey(KeyCode.E)) yAxisInput = -1f;
+        if (Input.GetKey(KeyCode.Q)) yAxisInput = -1f;
+        else if (Input.GetKey(KeyCode.E)) yAxisInput = 1f;
         else yAxisInput = 0f;
 
         Vector3 keyboardInput = new Vector3(Input.GetAxis("Horizontal"), yAxisInput, Input.GetAxis("Vertical")).normalized;
@@ -124,6 +124,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void WaterMovement(Vector3 input)
     {
+        Vector3 moveDir = transform.TransformDirection(new Vector3(input.x, input.y, input.z)) * currentPlayerMovementSpeed * Time.fixedDeltaTime;
+        rb.velocity = new Vector3(moveDir.x, 0, moveDir.z);
+        rb.AddForce(new Vector3(0, input.y * 100f, 0));
 
     }
 
@@ -136,9 +139,19 @@ public class PlayerMovement : MonoBehaviour
         xAxisCameraRot -= mouseInput.y;
         xAxisCameraRot = Mathf.Clamp(xAxisCameraRot, -90f, 90f);
 
+
         //Camera rotation
-        cameraObject.transform.localEulerAngles = new Vector3(xAxisCameraRot, 0f, 0f);
-        transform.Rotate(new Vector3(0f, mouseInput.x, 0));
+        if (!IsInWater)
+        {
+            cameraObject.transform.localEulerAngles = new Vector3(xAxisCameraRot, 0f, 0f);
+            transform.Rotate(new Vector3(0f, mouseInput.x, 0));
+        }
+        else
+        {
+            //transform.Rotate(new Vector3(-mouseInput.y, mouseInput.x, 0f));
+            cameraObject.transform.localEulerAngles = new Vector3(xAxisCameraRot, 0f, 0f);
+            transform.Rotate(new Vector3(0f, mouseInput.x, 0));
+        }
     }
 
     private void CameraShake()

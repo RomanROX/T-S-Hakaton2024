@@ -27,7 +27,6 @@ public class PlayerUI : MonoBehaviour
     {
         coinText.text = "COINS: " + GameManager.Instance.coins;
         SliderUpdate();
-        Debug.Log(fillSlider);
     }
 
     public void SetCursorImage(Sprite sprite, float uISize)

@@ -25,6 +25,8 @@ public class Interactor : MonoBehaviour
     [Header("CameraRaycast")]
     [SerializeField] Transform cameraTransform;
     [SerializeField] float interactRange;
+    bool startPicking = false;
+    Coroutine runningCorutine = null;
 
     [Header("Interacting")]
     [SerializeField] float interactionDuration;
@@ -42,11 +44,13 @@ public class Interactor : MonoBehaviour
     void Update()
     {
         Interact();
+        Debug.Log(startPicking);
     }
 
     public void Interact()
     {
         bool isInteractable = false;
+        
 
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange))
@@ -58,13 +62,15 @@ public class Interactor : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    StartCoroutine(corutine);
+                    //startPicking = true;
+                    runningCorutine = StartCoroutine(corutine);
                     playerUI.updateInteractSlider(interactionDuration, true);
 
                 }
                 if (Input.GetKeyUp(KeyCode.F))
                 {
-                    StopCoroutine(corutine);
+                    //startPicking = false;
+                    StopCoroutine(runningCorutine);
                     playerUI.updateInteractSlider(interactionDuration, false);
                 }
 
@@ -75,10 +81,13 @@ public class Interactor : MonoBehaviour
 
     private IEnumerator startInteraction(float duration, IInteractable interaction)
     {
-        yield return new WaitForSeconds(duration);
-        Debug.Log("Interaction done");
-        playerUI.updateInteractSlider(interactionDuration, false);
-        interaction.OnInteract();
+        //if (!startPicking) yield break;
+
+            yield return new WaitForSeconds(duration);
+            Debug.Log("Interaction done");
+            playerUI.updateInteractSlider(interactionDuration, false);
+            interaction.OnInteract();
+        
     }
 
     public void UpdateCursorState(bool isInteracatble)

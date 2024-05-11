@@ -28,8 +28,6 @@ public class Interactor : MonoBehaviour
 
     [Header("Interacting")]
     [SerializeField] float interactionDuration;
-    float interactTimer = 0f;
-    bool isInteracting = false;
 
     PlayerUI playerUI;
 
@@ -56,37 +54,31 @@ public class Interactor : MonoBehaviour
             if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactableObj))
             {
                 isInteractable = true;
+                IEnumerator corutine = startInteraction(interactionDuration, interactableObj);
 
-                if (Input.GetKey(KeyCode.F))
+                if (Input.GetKeyDown(KeyCode.F))
                 {
-                    if (!isInteracting)
-                    {
-                        interactTimer = Time.time;
-                        isInteracting = true;
-                        Debug.Log("Started interaction");
-                    }
-                    else
-                    {
-                        Debug.Log("interacting");
-                        if (interactTimer + interactionDuration < Time.time)
-                        {
-                            Debug.Log("interaction done");
-                            interactableObj.OnInteract();
-                            interactTimer = 0f;
-                            isInteracting = false;
-                        }
-                    }
-                    
+                    StartCoroutine(corutine);
+                    playerUI.updateInteractSlider(interactionDuration, true);
+
                 }
-                else
+                if (Input.GetKeyUp(KeyCode.F))
                 {
-                    isInteracting = false;
-                    interactTimer = 0f;
+                    StopCoroutine(corutine);
+                    playerUI.updateInteractSlider(interactionDuration, false);
                 }
 
             }
         }
         UpdateCursorState(isInteractable);
+    }
+
+    private IEnumerator startInteraction(float duration, IInteractable interaction)
+    {
+        yield return new WaitForSeconds(duration);
+        Debug.Log("Interaction done");
+        playerUI.updateInteractSlider(interactionDuration, false);
+        interaction.OnInteract();
     }
 
     public void UpdateCursorState(bool isInteracatble)

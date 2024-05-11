@@ -9,11 +9,14 @@ public class PlayerUI : MonoBehaviour
     [Header("Cursor")]
     [SerializeField] Image cursorImage;
     [SerializeField] Slider interactSlider;
+    bool fillSlider;
+    float duration = 0f;
+    float sliderValue = 0f;
+    float timer = 0f;
 
     [Header("Coins")]
     [SerializeField] TMP_Text coinText;
 
-    // Start is called before the first frame update
     void Start()
     {
         interactSlider.gameObject.SetActive(false); 
@@ -23,11 +26,46 @@ public class PlayerUI : MonoBehaviour
     void Update()
     {
         coinText.text = "COINS: " + GameManager.Instance.coins;
+        SliderUpdate();
+        Debug.Log(fillSlider);
     }
 
     public void SetCursorImage(Sprite sprite, float uISize)
     {
         cursorImage.sprite = sprite;
         cursorImage.rectTransform.sizeDelta = new Vector2 (uISize, uISize);
+    }
+
+    public void updateInteractSlider(float interactDuration, bool isInteracting)
+    {
+        if (isInteracting)
+        {
+            interactSlider.gameObject.SetActive(true);
+            duration = interactDuration;
+            fillSlider = true;
+        }
+        else
+        {
+            interactSlider.gameObject.SetActive(false);
+            duration = 0;
+            fillSlider = false;
+        }
+
+    }
+
+    public void SliderUpdate()
+    {
+        if(fillSlider)
+        {
+            timer += Time.deltaTime;
+            sliderValue = Mathf.Clamp01(timer/duration);
+        }
+        else
+        {
+            sliderValue = 0f;
+            timer = 0f;
+        }
+
+        interactSlider.value = sliderValue;
     }
 }

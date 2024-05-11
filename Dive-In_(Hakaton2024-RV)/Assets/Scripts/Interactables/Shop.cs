@@ -23,6 +23,6 @@ public class Shop : MonoBehaviour, IInteractable
 
     void shopInteract()
     {
-        Debug.Log("Shop opened!!!");
+        Debug.Log("!SHOP OPENED!");
     }
 }

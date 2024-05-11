@@ -15,7 +15,7 @@ public class StartExpedition : MonoBehaviour, IInteractable
     
     void startExpedition()
     {
-        Debug.Log("EXPEDITION STARTED;");
+        Debug.Log("!EXPEDITION STARTED!");
         //SceneManager.LoadScene(imeScene);
     }    
 }

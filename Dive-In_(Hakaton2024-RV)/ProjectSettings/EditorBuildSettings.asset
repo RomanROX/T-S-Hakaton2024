@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/More.unity
     guid: 8ee6c7c9fa80ac841b6a98980307cc40
+  - enabled: 1
+    path: Assets/Scenes/Sacrifice.unity
+    guid: d08fe5d36bae4b747bab684cdbf8994d
   m_configObjects: {}

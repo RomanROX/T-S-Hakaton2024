@@ -55,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         currentCameraShake = walkCameraShakeIntensity;
         currentCameraPOV = walkCameraPOV;
         currentPlayerMovementSpeed = playerWalkMovementSpeed;
+        currentPlayerMovementSpeed *= GameManager.Instance.speedMultiplier;
 
         rb = GetComponent<Rigidbody>();
         virtualPlayerCamera = cameraObject.GetComponent<CinemachineVirtualCamera>();

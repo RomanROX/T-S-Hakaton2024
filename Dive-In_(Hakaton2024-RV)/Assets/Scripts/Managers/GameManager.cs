@@ -13,10 +13,10 @@ public class GameManager : MonoBehaviour
     public int coins = 0;
 
     [Header("Player Upgrades")]
-    public int u_Peraje = 0;
-    public int u_Rukavice = 0;
-    public int u_Spremnik = 0;
-    public int u_Naocale = 0;
+    public int u_Peraje = 1;
+    public int u_Rukavice = 1;
+    public int u_Spremnik = 1;
+    public int u_Naocale = 1;
 
     [Header("Player Stats")]
     public float speedMultiplier;
@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        speedMultiplier = 1f + (0.05f * u_Peraje);
-        pickUpSpeedMultiplier = 1f + (0.1f * u_Rukavice);
-        tankSizeMultiplier = 1f + (0.05f * u_Spremnik);
-        clarityMultiplier = 1f + (0.1f * u_Naocale);
+        speedMultiplier = 1f + (0.15f * u_Peraje);
+        pickUpSpeedMultiplier = 1f + (0.15f * u_Rukavice);
+        tankSizeMultiplier = 1f + (0.15f * u_Spremnik);
+        clarityMultiplier = 1f + (0.5f * u_Naocale);
 
         if (Instance is null)
         {

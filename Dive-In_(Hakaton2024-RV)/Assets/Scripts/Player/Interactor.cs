@@ -25,16 +25,19 @@ public class Interactor : MonoBehaviour
     [Header("CameraRaycast")]
     [SerializeField] Transform cameraTransform;
     [SerializeField] float interactRange;
-    bool startPicking = false;
+    //bool startPicking = false;
     Coroutine runningCorutine = null;
 
     [Header("Interacting")]
-    [SerializeField] float interactionDuration;
+    [SerializeField] float defInteractionDuration;
+    float currentInteractionDuration;
 
     PlayerUI playerUI;
 
     private void Start()
     {
+        currentInteractionDuration = defInteractionDuration * GameManager.Instance.pickUpSpeedMultiplier;
+
         playerUI = GetComponent<PlayerUI>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -57,20 +60,20 @@ public class Interactor : MonoBehaviour
             if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactableObj))
             {
                 isInteractable = true;
-                IEnumerator corutine = startInteraction(interactionDuration, interactableObj);
+                IEnumerator corutine = startInteraction(currentInteractionDuration, interactableObj);
 
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     //startPicking = true;
                     runningCorutine = StartCoroutine(corutine);
-                    playerUI.updateInteractSlider(interactionDuration, true);
+                    playerUI.updateInteractSlider(currentInteractionDuration, true);
 
                 }
                 if (Input.GetKeyUp(KeyCode.F))
                 {
                     //startPicking = false;
                     StopCoroutine(runningCorutine);
-                    playerUI.updateInteractSlider(interactionDuration, false);
+                    playerUI.updateInteractSlider(currentInteractionDuration, false);
                 }
 
             }
@@ -84,7 +87,7 @@ public class Interactor : MonoBehaviour
 
             yield return new WaitForSeconds(duration);
             Debug.Log("Interaction done");
-            playerUI.updateInteractSlider(interactionDuration, false);
+            playerUI.updateInteractSlider(currentInteractionDuration, false);
             interaction.OnInteract();
         
     }

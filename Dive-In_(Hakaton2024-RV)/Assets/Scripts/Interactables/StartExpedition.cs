@@ -11,11 +11,10 @@ public class StartExpedition : MonoBehaviour, IInteractable
         startExpedition();
     }
 
-    [SerializeField] string imeScene;
-    
+    [SerializeField] ExpeditionPaySystem paySystem;
+
     void startExpedition()
     {
-        Debug.Log("!EXPEDITION STARTED!");
-        //SceneManager.LoadScene(imeScene);
+        paySystem.ExpeditionPayEnter();
     }    
 }

@@ -18,10 +18,13 @@ public class ShopManager : MonoBehaviour
     [SerializeField] int maskPrice;
     [SerializeField] int TankePrice;
     [SerializeField] int FinsPrice;
+
+    public AudioClip buySound;
+    AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
-        
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -46,6 +49,7 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Bought glove upgrade");
             GameManager.Instance.coins -= (int)Mathf.Pow(glovePrice, GameManager.Instance.u_Rukavice);
             GameManager.Instance.u_Rukavice++;
+            audio.PlayOneShot(buySound);
         }
     }
     public void BuyMaskUpgrade()
@@ -55,6 +59,8 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Bought mask upgrade");
             GameManager.Instance.coins -= (int)Mathf.Pow(maskPrice, GameManager.Instance.u_Naocale);
             GameManager.Instance.u_Naocale++;
+            audio.PlayOneShot(buySound);
+
         }
     }
     public void BuyTankUpgrade()
@@ -64,6 +70,8 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Bough tank upgrade");
             GameManager.Instance.coins -= (int)Mathf.Pow(TankePrice, GameManager.Instance.u_Spremnik);
             GameManager.Instance.u_Spremnik++;
+            audio.PlayOneShot(buySound);
+
         }
     }
     public void BuyFinsUpgrade()
@@ -73,6 +81,8 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Bough Fins upgrade");
             GameManager.Instance.coins -= (int)Mathf.Pow(FinsPrice, GameManager.Instance.u_Peraje);
             GameManager.Instance.u_Peraje++;
+            audio.PlayOneShot(buySound);
+
         }
     }
 }

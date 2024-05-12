@@ -29,11 +29,13 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        speedMultiplier = 1f + (0.15f * u_Peraje);
-        pickUpSpeedMultiplier = 1f + (0.15f * u_Rukavice);
-        tankSizeMultiplier = 1f + (0.15f * u_Spremnik);
-        clarityMultiplier = 1f + (0.5f * u_Naocale);
+        
 
+        
+    }
+
+    void Start()
+    {
         if (Instance is null)
         {
             Instance = this;
@@ -45,7 +47,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Update()
     {
+        speedMultiplier = 1f + (0.15f * u_Peraje);
+        pickUpSpeedMultiplier = 1f - (0.15f * u_Rukavice);
+        tankSizeMultiplier = 1f + (0.15f * u_Spremnik);
+        clarityMultiplier = 1f + (0.5f * u_Naocale);
     }
 }

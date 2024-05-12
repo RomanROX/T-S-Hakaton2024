@@ -494,3 +494,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ae64cad52d5f14b8922a5657cd95fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trashPickup: {fileID: 8300000, guid: 9b520211b70c30b428f464ff229e2655, type: 3}

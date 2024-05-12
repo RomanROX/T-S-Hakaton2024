@@ -45,8 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfExpedition: 0
-  coins: 651
+  coins: 1000
   u_Peraje: 0
   u_Rukavice: 0
   u_Spremnik: 0
   u_Naocale: 0
+  speedMultiplier: 0
+  pickUpSpeedMultiplier: 0
+  tankSizeMultiplier: 0
+  clarityMultiplier: 0
+  trashCollected: 0

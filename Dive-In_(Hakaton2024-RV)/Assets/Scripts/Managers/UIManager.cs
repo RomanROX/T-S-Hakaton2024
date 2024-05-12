@@ -19,19 +19,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image tankFillImage;
     [SerializeField] Color fullColor;
     [SerializeField] Color lowColor;
-
     float sliderValue;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Trash")]
+    [SerializeField] TMP_Text trashCollectedText;
 
-    // Update is called once per frame
     void Update()
     {
         BoatDistance();
+
+        trashCollectedText.text = "TRASH: " + GameManager.Instance.trashCollected.ToString();
     }
 
     public void BoatDistance()

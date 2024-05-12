@@ -27,12 +27,17 @@ public class TankSystem : MonoBehaviour
     public void TankUsage()
     {
 
-        if(currentTankState > 0)
+        if (currentTankState > 0)
         {
             currentTankState -= Time.deltaTime;
             UIman.TankStatus(currentTankState, maxTankDuration);
         }
-        else Debug.Log("DEAD");
+        else OnDeath();
 
+    }
+
+    public void OnDeath()
+    {
+        Debug.Log("DEAD");
     }
 }

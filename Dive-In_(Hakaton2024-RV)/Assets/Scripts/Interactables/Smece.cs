@@ -8,9 +8,13 @@ public class Smece : MonoBehaviour, IInteractable
     {
         PickUp();
     }
-      
+
+    [SerializeField] public GameObject bubbleVFX;
+
     public void PickUp()
     {
+        GameManager.Instance.trashCollected++;
+
         Debug.Log("!TRASH PICKED UP!");
         Destroy(gameObject);
     }

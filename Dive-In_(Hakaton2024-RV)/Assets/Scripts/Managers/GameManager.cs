@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     public float tankSizeMultiplier;
     public float clarityMultiplier;
 
+    [Header("Player Expedition")]
+    public int trashCollected = 0;
+
     void Awake()
     {
         speedMultiplier = 1f + (0.05f * u_Peraje);
